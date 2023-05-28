@@ -64,5 +64,33 @@ class RestaurantTest {
         assertThrows(itemNotFoundException.class,
                 ()->restaurant.removeFromMenu("French fries"));
     }
+    @Test
+    public void item_total_is_wrong() throws itemNotFoundException{
+        List<String> items = new ArrayList<String>();
+        items.add("Sweet corn soup");
+        int total;
+        try{
+            total = restaurant.getOrderTotal(items);
+            assertNotEquals(320, total); //Total is 119.
+            items.add("Vegetable lasagne");
+            //total = restaurant.getOrderTotal(items);
+        }catch(itemNotFoundException e){
+            assertEquals(false, "Restaurent was not found");            
+        }
+    }    
+    @Test
+    public void item_total_is_correct() throws itemNotFoundException{
+        List<String> items = new ArrayList<String>();
+        items.add("Sweet corn soup");
+        int total;
+        try{
+            total = restaurant.getOrderTotal(items);
+            assertEquals(119, total); //Total is 119.
+            items.add("Vegetable lasagne");
+            //total = restaurant.getOrderTotal(items);
+        }catch(itemNotFoundException e){
+            assertEquals(false, "Restaurent was not found");            
+        }
+    }    
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 }

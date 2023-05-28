@@ -38,6 +38,18 @@ public class Restaurant {
         return null;
     }
 
+    public int getOrderTotal(List<String> selectedItems) throws itemNotFoundException{
+        int total = 0;
+        for(String i1: selectedItems){
+            if(this.findItemByName(i1) != null){
+                total += this.findItemByName(i1).getPrice();
+            }else{
+                throw new itemNotFoundException(i1);
+            }
+        }
+        return total;
+    }
+
     public void addToMenu(String name, int price) {
         Item newItem = new Item(name,price);
         menu.add(newItem);
